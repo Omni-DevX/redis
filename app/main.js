@@ -30,6 +30,7 @@ const server = net.createServer((connection) => {
     if(commands[2] === '--dir'){
         storage[commands[2]] = commands[4];
         storage[commands[6]] = commands[8];
+        console.log(storage);
     }
     if(commands[2].toLowerCase() === 'config'){
         if(commands[4].toLowerCase() === 'get'){
