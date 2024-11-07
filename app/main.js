@@ -14,11 +14,6 @@ const server = net.createServer((connection) => {
     }
     if(commands[2].toLowerCase() === 'set'){
         storage[commands[4]] = commands[6];
-        if(commands[8].toLowerCase() === 'px'){
-            setTimeout(()=>{
-                delete storage[commands[4]];
-            }, commands[10]);
-        }
         return connection.write('+OK\r\n');
     }
     if(commands[2].toLowerCase() === 'get'){
@@ -26,6 +21,11 @@ const server = net.createServer((connection) => {
         return connection.write('$'+storage[commands[4]].length+'\r\n'+storage[commands[4]]+'\r\n');
         }
         return connection.write('$-1\r\n');
+    }
+    if(commands[8].toLowerCase() === 'px'){
+        setTimeout(()=>{
+            delete storage[commands[4]];
+        }, commands[10]);
     }
 
     connection.write('+PONG\r\n');
