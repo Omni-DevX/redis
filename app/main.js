@@ -9,8 +9,9 @@ const server = net.createServer((connection) => {
   connection.on('data',(data)=>{
     const commands = data.toString().split('\r\n');
     if(commands[2].toLowerCase() === 'echo'){
-        connection.write('$'+commands[4].length+'\r\n'+commands[4]+'\r\n');
+        return connection.write('$'+commands[4].length+'\r\n'+commands[4]+'\r\n');
     }
+    connection.write('+PONG\r\n');
   })
 });
 
