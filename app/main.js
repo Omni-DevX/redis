@@ -25,7 +25,7 @@ const server = net.createServer((connection) => {
     if(commands[8].toLowerCase() === 'px'){
         setTimeout(()=>{
             delete storage[commands[4]];
-        }, commands[10]);
+        }, Number(commands[10]));
     }
 
     connection.write('+PONG\r\n');
