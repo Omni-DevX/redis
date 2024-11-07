@@ -24,8 +24,7 @@ const server = net.createServer((connection) => {
     }
     if(commands[8].toLowerCase() === 'px'){
         setTimeout(()=>{
-            delete storage.commands[4];
-        
+            delete storage[commands[4]];
         }, commands[10]);
     }
 
