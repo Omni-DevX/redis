@@ -11,7 +11,6 @@ const server = net.createServer((connection) => {
     if(commands[2].toLowerCase() === 'echo'){
         connection.write('$'+commands[4].length+'\r\n'+commands[4]+'\r\n');
     }
-    connection.write('+PONG\r\n');
   })
 });
 
