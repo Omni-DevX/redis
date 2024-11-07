@@ -34,10 +34,10 @@ const server = net.createServer((connection) => {
     if(commands[2].toLowerCase() === 'config'){
         if(commands[4].toLowerCase() === 'get'){
             if(commands[6].toLowerCase() === 'dir'){
-                return connection.write('*2\r\n$3\r\ndir\r\n$'+storage[commands[2]].length+'\r\n'+storage[commands[4]]+'\r\n');
+                return connection.write('*2\r\n$3\r\ndir\r\n$'+storage[commands[2]].length+'\r\n'+storage[commands[2]]+'\r\n');
             }
             if(commands[6].toLowerCase() === 'dbfilename'){
-                return connection.write('*2\r\n$10\r\ndbfilename\r\n$'+storage[commands[6]].length+'\r\n'+storage[commands[8]]+'\r\n');
+                return connection.write('*2\r\n$10\r\ndbfilename\r\n$'+storage[commands[6]].length+'\r\n'+storage[commands[6]]+'\r\n');
             }
         }
     }
