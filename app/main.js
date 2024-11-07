@@ -16,7 +16,7 @@ const server = net.createServer((connection) => {
         storage[commands[4]] = commands[6];
         return connection.write('+OK\r\n');
     }
-    if(commands[2].toLowerCase() === get){
+    if(commands[2].toLowerCase() === 'get'){
         if(storage[commands[4]].length){
         return connection.write('$'+storage[commands[4]].length+'\r\n'+storage[commands[4]]+'\r\n');
         }
