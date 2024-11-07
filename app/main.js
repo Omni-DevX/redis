@@ -16,16 +16,16 @@ const server = net.createServer((connection) => {
         storage[commands[4]] = commands[6];
         return connection.write('+OK\r\n');
     }
+    if(commands[10]){
+        setTimeout(()=>{
+            delete storage[commands[4]];
+        }, commands[10]);
+    }
     if(commands[2].toLowerCase() === 'get'){
         if(storage[commands[4]]){
         return connection.write('$'+storage[commands[4]].length+'\r\n'+storage[commands[4]]+'\r\n');
         }
         return connection.write('$-1\r\n');
-    }
-    if(commands[8].toLowerCase() === 'px'){
-        setTimeout(()=>{
-            delete storage[commands[4]];
-        }, Number(commands[10]));
     }
 
     connection.write('+PONG\r\n');
