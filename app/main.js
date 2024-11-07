@@ -14,12 +14,12 @@ const server = net.createServer((connection) => {
     }
     if(commands[2].toLowerCase() === 'set'){
         storage[commands[4]] = commands[6];
+        if(commands[10]){
+            setTimeout(()=>{
+                delete storage[commands[4]];
+            }, commands[10]);
+        }
         return connection.write('+OK\r\n');
-    }
-    if(commands[10]){
-        setTimeout(()=>{
-            delete storage[commands[4]];
-        }, commands[10]);
     }
     if(commands[2].toLowerCase() === 'get'){
         if(storage[commands[4]]){
