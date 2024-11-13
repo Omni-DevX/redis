@@ -4,6 +4,7 @@ const config = new Map();
 
 // You can use print statements as follows for debugging, they'll be visible when running tests.
 const argument = process.argv
+console.log(argument);
 const [fileDir,fileName] = argument.slice(2);
 
 console.log(typeof fileDir);
