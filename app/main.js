@@ -6,10 +6,12 @@ const config = new Map();
 const argument = process.argv
 const [fileDir,fileName] = argument.slice(2);
 
+console.log(typeof fileDir);
 if(fileDir && fileName){
     config.set('dir',fileDir);
     config.set('dbfilename', fileName);
 }
+console.log(config.get('dir'));
 
 // Uncomment this block to pass the first stage
 const server = net.createServer((connection) => {
