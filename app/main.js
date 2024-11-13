@@ -1,6 +1,7 @@
 const net = require("net");
 const storage = {}
 const config = new Map();
+const dataStorage = new Map();
 
 // You can use print statements as follows for debugging, they'll be visible when running tests.
 const argument = process.argv.slice(2);
@@ -8,7 +9,7 @@ console.log(argument);
 const [fileDir,fileName] = [argument[1]??null, argument[3]??null];
 
 function getAllKeys() {
-    const keys = [...config.keys()] 
+    const keys = [...dataStorage.keys()] 
     console.log(keys);
     allKeys = '*'+keys.length;
     for(const key of keys){
@@ -33,17 +34,18 @@ const server = net.createServer((connection) => {
         return connection.write('$'+commands[4].length+'\r\n'+commands[4]+'\r\n');
     }
     if(commands[2].toLowerCase() === 'set'){
-        storage[commands[4]] = commands[6];
+        //storage[commands[4]] = commands[6];
+        dataStorage.set(commands[4], commands[6]);
         if(commands[10]){
             setTimeout(()=>{
-                delete storage[commands[4]];
+                dataStorage.delete(commands[4]);
             }, commands[10]);
         }
         return connection.write('+OK\r\n');
     }
     if(commands[2].toLowerCase() === 'get'){
         if(storage[commands[4]]){
-        return connection.write('$'+storage[commands[4]].length+'\r\n'+storage[commands[4]]+'\r\n');
+        return connection.write('$'+dataStorage.get(commands[4]).length+'\r\n'+dataStorage.get(commands[4])+'\r\n');
         }
         return connection.write('$-1\r\n');
     }
