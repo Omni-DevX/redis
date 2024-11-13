@@ -9,6 +9,7 @@ const [fileDir,fileName] = [argument[1]??null, argument[3]??null];
 
 function getAllKeys() {
     const keys = [...config.keys()] 
+    console.log(keys);
     allKeys = '*'+keys.length;
     for(const key of keys){
         allKeys+= '\r\n$'+key.length+'\r\n'+key+'\r\n';
