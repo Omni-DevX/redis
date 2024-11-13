@@ -7,6 +7,15 @@ const argument = process.argv.slice(2);
 console.log(argument);
 const [fileDir,fileName] = [argument[1]??null, argument[3]??null];
 
+function getAllKeys() {
+    const keys = [...config.keys()] 
+    allKeys = '*'+keys.length;
+    for(const key of keys){
+        allKeys+= '\r\n$'+key.length+'\r\n'+key+'\r\n';
+    }   
+    return allKeys 
+}
+
 console.log(typeof fileDir);
 if(fileDir && fileName){
     config.set('dir',fileDir);
@@ -47,6 +56,9 @@ const server = net.createServer((connection) => {
                 return connection.write('*2\r\n$10\r\ndbfilename\r\n$'+config.get('dbfilename').length+'\r\n'+config.get('dbfilename')+'\r\n');
             }
         }
+    }
+    if(commands[4].toLowerCase() === 'keys'){
+        return connection.write(getAllKeys());
     }
 
     connection.write('+PONG\r\n');
