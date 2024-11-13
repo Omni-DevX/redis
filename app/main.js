@@ -15,7 +15,8 @@ function getAllKeys() {
     for(const key of keys){
         allKeys+= '\r\n$'+key.length+'\r\n'+key+'\r\n';
     }   
-    return allKeys 
+    console.log(allKeys);
+    return allKeys; 
 }
 
 console.log(typeof fileDir);
