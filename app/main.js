@@ -1,8 +1,15 @@
 const net = require("net");
 const storage = {}
+const config = new Map();
 
 // You can use print statements as follows for debugging, they'll be visible when running tests.
-console.log("Logs from your program will appear here!");
+const argument = process.argv
+const [fileDir,fileName] = argument.slice(2);
+
+if(fileDir && fileName){
+    config.set('dir',fileDir);
+    config.set('dbFileName', fileName);
+}
 
 // Uncomment this block to pass the first stage
 const server = net.createServer((connection) => {
@@ -30,7 +37,6 @@ const server = net.createServer((connection) => {
     if(commands[2] === '--dir'){
         storage[commands[2]] = commands[4];
         storage[commands[6]] = commands[8];
-        console.log(storage);
     }
     if(commands[2].toLowerCase() === 'config'){
         if(commands[4].toLowerCase() === 'get'){
