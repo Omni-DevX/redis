@@ -36,10 +36,6 @@ const server = net.createServer((connection) => {
         }
         return connection.write('$-1\r\n');
     }
-    if(commands[2] === '--dir'){
-        storage[commands[2]] = commands[4];
-        storage[commands[6]] = commands[8];
-    }
     if(commands[2].toLowerCase() === 'config'){
         if(commands[4].toLowerCase() === 'get'){
             if(commands[6].toLowerCase() === 'dir'){
