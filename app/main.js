@@ -43,6 +43,7 @@ const server = net.createServer((connection) => {
     if(commands[2].toLowerCase() === 'config'){
         if(commands[4].toLowerCase() === 'get'){
             if(commands[6].toLowerCase() === 'dir'){
+                console.log(config.get('dir'));
                 return connection.write('*2\r\n$3\r\ndir\r\n$'+config.get('dir').length+'\r\n'+config.get('dir')+'\r\n');
             }
             if(commands[6].toLowerCase() === 'dbfilename'){
