@@ -3,7 +3,7 @@ const storage = {}
 const config = new Map();
 
 // You can use print statements as follows for debugging, they'll be visible when running tests.
-const argument = process.argv.slice[2]
+const argument = process.argv.slice(2);
 console.log(argument);
 const [fileDir,fileName] = [argument[1]??null, argument[3]??null];
 
