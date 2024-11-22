@@ -1,19 +1,15 @@
 name: AI Code Reviewer
-
-on:
+'on':
   push:
     branches:
       - main
-  pull_request:
-
+  pull_request: null
 jobs:
   code_review:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Collect Changed Files
         id: changed_files
         run: |
@@ -27,10 +23,9 @@ jobs:
 
           # Export the file list for later steps
           echo "files=$files" >> $GITHUB_ENV
-
       - name: Run AI Code Reviewer
         env:
-          BACKEND_URL: "http://your-backend-url/review" # Replace with your backend URL
+          BACKEND_URL: 'http://your-backend-url/review'
         run: |
           # Loop through changed files and send each to the AI reviewer
           for file in ${{ env.files }}; do
