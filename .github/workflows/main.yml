@@ -1,0 +1,24 @@
+name: AI Code Reviewer
+'on':
+  push:
+    branches:
+      - main
+  pull_request: null
+jobs:
+  code_review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run AI Code Reviewer
+        env:
+          BACKEND_URL: 'http://127.0.0.1:5001/review'
+        run: |
+          for file in $(git diff --name-only HEAD~1 HEAD); do
+            if [[ $file == *.py || $file == *.js ]]; then
+              echo "Reviewing $file..."
+              response=$(curl -X POST $BACKEND_URL -H "Content-Type: application/json" -d "{\"code\": \"$(cat $file)\"}")
+              echo "AI Suggestions for $file:"
+              echo $response
+            fi
+          done
