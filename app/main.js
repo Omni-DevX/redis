@@ -2,6 +2,7 @@ const net = require("net");
 const storage = {}
 const config = new Map();
 const dataStorage = new Map();
+const text='Hello World';
 
 // You can use print statements as follows for debugging, they'll be visible when running tests.
 const argument = process.argv.slice(2);
