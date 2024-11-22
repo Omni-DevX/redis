@@ -1,24 +1,46 @@
 name: AI Code Reviewer
-'on':
+
+on:
   push:
     branches:
       - main
-  pull_request: null
+  pull_request:
+
 jobs:
   code_review:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Collect Changed Files
+        id: changed_files
+        run: |
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            # Normal diff for subsequent commits
+            files=$(git diff --name-only HEAD~1 HEAD)
+          else
+            # Diff from the root commit for the initial commit
+            files=$(git diff --name-only --root HEAD)
+          fi
+
+          # Export the file list for later steps
+          echo "files=$files" >> $GITHUB_ENV
+
       - name: Run AI Code Reviewer
         env:
-          BACKEND_URL: 'http://127.0.0.1:5001/review'
+          BACKEND_URL: "http://your-backend-url/review" # Replace with your backend URL
         run: |
-          for file in $(git diff --name-only HEAD~1 HEAD); do
+          # Loop through changed files and send each to the AI reviewer
+          for file in ${{ env.files }}; do
             if [[ $file == *.py || $file == *.js ]]; then
               echo "Reviewing $file..."
-              response=$(curl -X POST $BACKEND_URL -H "Content-Type: application/json" -d "{\"code\": \"$(cat $file)\"}")
+              content=$(cat "$file" | jq -Rs .) # Escape JSON
+              response=$(curl -s -X POST $BACKEND_URL -H "Content-Type: application/json" -d "{\"code\": $content}")
               echo "AI Suggestions for $file:"
               echo $response
+            else
+              echo "Skipping non-code file: $file"
             fi
           done
