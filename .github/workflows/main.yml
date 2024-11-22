@@ -25,7 +25,7 @@ jobs:
           echo "files=$files" >> $GITHUB_ENV
       - name: Run AI Code Reviewer
         env:
-          BACKEND_URL: 'http://10.241.220.147:5001/review'
+          BACKEND_URL: 'http://127.0.0.1:5001/review'
         run: |
           # Loop through changed files and send each to the AI reviewer
           for file in ${{ env.files }}; do
