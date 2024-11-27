@@ -20,7 +20,7 @@ function getAllKeys() {
     for (let key of keys) {
       response += `$${key.length}\r\n${key}\r\n`;
     }
-    return connection.write(`*${keys.length}\r\n` + response);
+    return `*${keys.length}\r\n` + response;
 }
 
 if(fileDir && fileName){
@@ -122,7 +122,7 @@ const server = net.createServer((connection) => {
         }
     }
     if(commands[4].toLowerCase() === 'keys'){
-        return getAllKeys();
+        return connection.write(getAllKeys());
     }
 
     connection.write('+PONG\r\n');
