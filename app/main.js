@@ -18,7 +18,7 @@ function getAllKeys() {
     const keys = dataStorage.keys();
     const key = keys.next().value;
     let response = "";
-      response += `${key.length}\r\n${keys}\r\n`;
+      response += `${key.length}\r\n${key}\r\n`;
     return `*${keys.length}\r\n` + response;
 }
 
