@@ -15,12 +15,12 @@ const argument = process.argv.slice(2);
 const [fileDir,fileName] = [argument[1]??null, argument[3]??null];
 
 function getAllKeys() {
-    const keys = [...dataStorage.keys()] 
-    allKeys = '*'+keys.length;
-    for(const key of keys){
-        allKeys+= '\r\n$'+key.length+'\r\n'+key+'\r\n';
-    }   
-    return allKeys; 
+    const keys = Object.keys(dataStorage);
+    let response = "";
+    for (let key of keys) {
+      response += `$${key.length}\r\n${key}\r\n`;
+    }
+    connection.write(`*${keys.length}\r\n` + response);
 }
 
 if(fileDir && fileName){
@@ -123,7 +123,7 @@ const server = net.createServer((connection) => {
         }
     }
     if(commands[4].toLowerCase() === 'keys'){
-        return connection.write(getAllKeys());
+        getAllKeys();
     }
 
     connection.write('+PONG\r\n');
