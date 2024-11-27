@@ -1,30 +1,37 @@
 const net = require("net");
+const fs = require("fs");
 const storage = {}
 const config = new Map();
 const dataStorage = new Map();
 
+
+
 // You can use print statements as follows for debugging, they'll be visible when running tests.
 const argument = process.argv.slice(2);
-console.log(argument);
 const [fileDir,fileName] = [argument[1]??null, argument[3]??null];
 
 function getAllKeys() {
     const keys = [...dataStorage.keys()] 
-    console.log(keys);
     allKeys = '*'+keys.length;
     for(const key of keys){
         allKeys+= '\r\n$'+key.length+'\r\n'+key+'\r\n';
     }   
-    console.log(allKeys);
     return allKeys; 
 }
 
-console.log(typeof fileDir);
 if(fileDir && fileName){
     config.set('dir',fileDir);
     config.set('dbfilename', fileName);
 }
 console.log(config.get('dir'));
+
+fs.readFile(config.get('dbfilename'), 'utf-8', (err, data)=>{
+    if(err){
+        console.log(err);
+        return;
+    }
+    console.log(data);
+})
 
 // Uncomment this block to pass the first stage
 const server = net.createServer((connection) => {
