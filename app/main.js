@@ -80,7 +80,7 @@ while(i < data.length){
         const key = getNextBytesWithLength(keyLength);
         const valueLength = getKeyLength();
         const value = getNextBytesWithLength(valueLength);
-        console.log('key',key.toString(),'value':value.toString());
+        console.log('key',key.toString(),'value',value.toString());
         dataStorage[key] = value;
         
     }
