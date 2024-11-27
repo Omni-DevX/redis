@@ -18,9 +18,7 @@ function getAllKeys() {
     const keys = dataStorage.keys();
     console.log(keys);
     let response = "";
-    for (let key of keys) {
-      response += `${key.toString().length}\r\n${key}\r\n`;
-    }
+      response += `${keys.next().value.length}\r\n${keys.next().value}\r\n`;
     return `*${keys.length}\r\n` + response;
 }
 
