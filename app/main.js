@@ -40,6 +40,7 @@ let i = 0;
 
 const getKeyLength = ()=>{
     const firsByte = data[i];
+    console.log(firsByte);
     const whatTypeOfLengthEncoding = firsByte >> 6;
     let length = 0;
     switch(whatTypeOfLengthEncoding){
