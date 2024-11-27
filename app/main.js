@@ -88,7 +88,6 @@ function getFileData(){
    console.log(dataStorage);
    }
 
-   getFileData();
 // Uncomment this block to pass the first stage
 const server = net.createServer((connection) => {
   // Handle connection
@@ -125,6 +124,7 @@ const server = net.createServer((connection) => {
         }
     }
     else if(commands[2].toLowerCase() === 'keys'){
+        getFileData();
         return connection.write(getAllKeys());
     }
     return connection.write('+PONG\r\n')
