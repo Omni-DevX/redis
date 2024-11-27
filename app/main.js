@@ -86,7 +86,6 @@ function getFileData(){
        i++;
    }
    }
-getFileData();
 
 // Uncomment this block to pass the first stage
 const server = net.createServer((connection) => {
@@ -107,7 +106,7 @@ const server = net.createServer((connection) => {
         return connection.write('+OK\r\n');
     }
     else if(commands[2].toLowerCase() === 'get'){
-        console.log(dataStorage.get(commands[4].toString(2)), commands[4]);
+        getFileData();
         if(dataStorage.get(commands[4])){
         return connection.write('$'+dataStorage.get(commands[4]).length+'\r\n'+dataStorage.get(commands[4])+'\r\n');
         }
@@ -125,6 +124,7 @@ const server = net.createServer((connection) => {
         }
     }
     else if(commands[2].toLowerCase() === 'keys'){
+        getFileData();
         return connection.write(getAllKeys());
     }
     return connection.write('+PONG\r\n')
