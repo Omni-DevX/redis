@@ -32,7 +32,7 @@ fs.readFile(join(config.get('dir'),config.get('dbfilename')), (err, data)=>{
         return;
     }
     console.log(data);
-    console.log(data[0]);
+    console.log(data[0].toString(16));
 })
 
 // Uncomment this block to pass the first stage
