@@ -27,14 +27,16 @@ if(fileDir && fileName){
     config.set('dir',fileDir);
     config.set('dbfilename', fileName);
 }
-
-const data = fs.readFileSync(join(config.get('dir'),config.get('dbfilename')), (err, data)=>{
+let data;
+function getFileData(){
+ data = fs.readFileSync(join(config.get('dir'),config.get('dbfilename')), (err, data)=>{
     if(err){
         console.log(err);
         return;
     }
     return data;
 })
+}
 
 let i = 0;
 
@@ -122,6 +124,7 @@ const server = net.createServer((connection) => {
         }
     }
     else if(commands[2].toLowerCase() === 'keys'){
+        getFileData();
         return connection.write(getAllKeys());
     }
   })
