@@ -28,15 +28,6 @@ if(fileDir && fileName){
     config.set('dbfilename', fileName);
 }
 let data;
-function getFileData(){
- data = fs.readFileSync(join(config.get('dir'),config.get('dbfilename')), (err, data)=>{
-    if(err){
-        console.log(err);
-        return;
-    }
-    return data;
-})
-}
 
 let i = 0;
 
@@ -72,21 +63,30 @@ expiryHashTable = ()=>{
     const bytes = getNextBytesWithLength(length);
 }
 
-while(i < data.length){
-    const currentByte = data[i].toString(16);
-    if(currentByte === opcodes.resizeDb){
-        i++;
-        hashTable();
-        expiryHashTable();
-        const keyLength = getKeyLength();
-        const key = getNextBytesWithLength(keyLength);
-        const valueLength = getKeyLength();
-        const value = getNextBytesWithLength(valueLength);
-        console.log('key',key.toString(),'value',value.toString());
-        dataStorage[key] = value;
-    }
-    i++;
-}
+function getFileData(){
+    data = fs.readFileSync(join(config.get('dir'),config.get('dbfilename')), (err, data)=>{
+       if(err){
+           console.log(err);
+           return;
+       }
+       return data;
+   })
+   while(i < data.length){
+       const currentByte = data[i].toString(16);
+       if(currentByte === opcodes.resizeDb){
+           i++;
+           hashTable();
+           expiryHashTable();
+           const keyLength = getKeyLength();
+           const key = getNextBytesWithLength(keyLength);
+           const valueLength = getKeyLength();
+           const value = getNextBytesWithLength(valueLength);
+           console.log('key',key.toString(),'value',value.toString());
+           dataStorage[key] = value;
+       }
+       i++;
+   }
+   }
 
 // Uncomment this block to pass the first stage
 const server = net.createServer((connection) => {
