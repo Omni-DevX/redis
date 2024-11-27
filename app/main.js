@@ -44,7 +44,7 @@ const getKeyLength = ()=>{
     let length = 0;
     switch(whatTypeOfLengthEncoding){
         case 0b00:
-            length = firsByte & 0b00111111;
+            length = firsByte ^ 0b00000000;
             i++;
             break;
     }
