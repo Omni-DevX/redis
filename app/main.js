@@ -85,6 +85,7 @@ function getFileData(){
        }
        i++;
    }
+   console.log(dataStorage);
    }
 
    getFileData();
