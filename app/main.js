@@ -94,7 +94,7 @@ const server = net.createServer((connection) => {
     if(commands[2].toLowerCase() === 'echo'){
         return connection.write('$'+commands[4].length+'\r\n'+commands[4]+'\r\n');
     }
-    if(commands[2].toLowerCase() === 'set'){
+    else if(commands[2].toLowerCase() === 'set'){
         //storage[commands[4]] = commands[6];
         dataStorage.set(commands[4], commands[6]);
         if(commands[10]){
@@ -104,13 +104,13 @@ const server = net.createServer((connection) => {
         }
         return connection.write('+OK\r\n');
     }
-    if(commands[2].toLowerCase() === 'get'){
+    else if(commands[2].toLowerCase() === 'get'){
         if(storage[commands[4]]){
         return connection.write('$'+dataStorage.get(commands[4]).length+'\r\n'+dataStorage.get(commands[4])+'\r\n');
         }
         return connection.write('$-1\r\n');
     }
-    if(commands[2].toLowerCase() === 'config'){
+    else if(commands[2].toLowerCase() === 'config'){
         if(commands[4].toLowerCase() === 'get'){
             if(commands[6].toLowerCase() === 'dir'){
                 console.log(config.get('dir').length);
@@ -121,7 +121,7 @@ const server = net.createServer((connection) => {
             }
         }
     }
-    if(commands[2].toLowerCase() === 'keys'){
+    else if(commands[2].toLowerCase() === 'keys'){
         return connection.write(getAllKeys());
     }
   })
