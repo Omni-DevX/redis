@@ -83,7 +83,7 @@ while(i < data.length){
         const value = getNextBytesWithLength(valueLength);
         console.log('key',key.toString(),'value',value.toString());
         dataStorage[key] = value;
-        
+        console.log('dataStorage', dataStorage);
     }
     i++;
 }
