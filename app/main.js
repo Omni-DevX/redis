@@ -16,7 +16,6 @@ const [fileDir,fileName] = [argument[1]??null, argument[3]??null];
 
 function getAllKeys() {
     const keys = Object.keys(dataStorage);
-    console.log(keys);
     let response = "";
     for (let key of keys) {
       response += `$${key.length}\r\n${key}\r\n`;
@@ -74,6 +73,7 @@ expiryHashTable = ()=>{
 while(i < data.length){
     const currentByte = data[i].toString(16);
     if(currentByte === opcodes.resizeDb){
+        console.log('Inside while loop');
         i++;
         hashTable();
         expiryHashTable();
