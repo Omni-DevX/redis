@@ -4,6 +4,9 @@ const { join } = require('path');
 const storage = {}
 const config = new Map();
 const dataStorage = new Map();
+const opcodes = {
+    resizeDb : 'fb'
+}
 
 
 
@@ -24,16 +27,65 @@ if(fileDir && fileName){
     config.set('dir',fileDir);
     config.set('dbfilename', fileName);
 }
-console.log(config.get('dir'));
 
-fs.readFile(join(config.get('dir'),config.get('dbfilename')), (err, data)=>{
+const data = fs.readFile(join(config.get('dir'),config.get('dbfilename')), (err, data)=>{
     if(err){
         console.log(err);
         return;
     }
-    console.log(data);
-    console.log(data[0].toString(16));
+    return data;
 })
+
+let i = 0;
+
+const getKeyLength = ()=>{
+    const firsByte = data[i];
+    const whatTypeOfLengthEncoding = firsByte >> 6;
+    let length = 0;
+    switch(whatTypeOfLengthEncoding){
+        case 0b00:
+            length = firsByte & 0b00111111;
+            i++;
+            break;
+    }
+        return length;
+}
+
+const getNextBytesWithLength = (length)=>{
+    let nextBytes = Buffer.alloc(length);
+    for(let k = 0; i<length ; i++){
+        nextBytes[k] = data[i];
+        i++;
+    }
+    return nextBytes;
+}
+
+hashTable = ()=>{
+    const length = getKeyLength();
+    const bytes = getNextBytesWithLength(length);
+}
+
+expiryHashTable = ()=>{
+    const length = getKeyLength();
+    const bytes = getNextBytesWithLength(length);
+}
+
+while(i < data.length){
+    const currentByte = data[i].toString(16);
+    if(currentByte === opcodes.resizeDb){
+        i++;
+        hashTable();
+        expiryHashTable();
+        const keyLength = getKeyLength();
+        const key = getNextBytesWithLength(keyLength);
+        const valueLength = getKeyLength();
+        const value = getNextBytesWithLength(valueLength);
+        console.log('key',key.toString(),'value':value.toString());
+        dataStorage[key] = value;
+        
+    }
+    i++;
+}
 
 // Uncomment this block to pass the first stage
 const server = net.createServer((connection) => {
