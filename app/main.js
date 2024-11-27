@@ -15,13 +15,12 @@ const argument = process.argv.slice(2);
 const [fileDir,fileName] = [argument[1]??null, argument[3]??null];
 
 function getAllKeys() {
-    const keys = Object.keys(dataStorage);
     let response = "";
     for (let [key, value] of dataStorage) {
       response += `$${key.length}\r\n${key}\r\n`;
     }
-    console.log(response, keys.length);
-    return `*${keys.length}\r\n` + response;
+    console.log(response, dataStorage.size);
+    return `*${dataStorage.size}\r\n` + response;
 }
 
 if(fileDir && fileName){
