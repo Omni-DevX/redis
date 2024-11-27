@@ -73,7 +73,6 @@ expiryHashTable = ()=>{
 while(i < data.length){
     const currentByte = data[i].toString(16);
     if(currentByte === opcodes.resizeDb){
-        console.log('Inside while loop');
         i++;
         hashTable();
         expiryHashTable();
@@ -123,7 +122,7 @@ const server = net.createServer((connection) => {
         }
     }
     if(commands[4].toLowerCase() === 'keys'){
-        getAllKeys();
+        return getAllKeys();
     }
 
     connection.write('+PONG\r\n');
