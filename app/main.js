@@ -124,8 +124,6 @@ const server = net.createServer((connection) => {
     if(commands[4].toLowerCase() === 'keys'){
         return connection.write(getAllKeys());
     }
-
-    connection.write('+PONG\r\n');
   })
 });
 
