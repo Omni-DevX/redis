@@ -41,6 +41,7 @@ let i = 0;
 const getKeyLength = ()=>{
     const firsByte = data[i];
     const whatTypeOfLengthEncoding = firsByte >> 6;
+    console.log(whatTypeOfLengthEncoding);
     let length = 0;
     switch(whatTypeOfLengthEncoding){
         case 0b00:
