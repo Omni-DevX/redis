@@ -90,11 +90,6 @@ function getFileData(){
 
 // Uncomment this block to pass the first stage
 const server = net.createServer((connection) => {
-    const dbPath = join(config.get('dir'), config.get('dbfilename'));
-	const isDbExists = fs.existsSync(dbPath);
-    if(isDbExists){
-    getFileData();
-    }
   // Handle connection
   connection.on('data',(data)=>{
     const commands = data.toString().split('\r\n');
@@ -125,6 +120,11 @@ const server = net.createServer((connection) => {
             }
             if(commands[6].toLowerCase() === 'dbfilename'){
                 return connection.write('*2\r\n$10\r\ndbfilename\r\n$'+config.get('dbfilename').length+'\r\n'+config.get('dbfilename')+'\r\n');
+            }
+            const dbPath = join(config.get('dir'), config.get('dbfilename'));
+            const isDbExists = fs.existsSync(dbPath);
+            if(isDbExists){
+            getFileData();
             }
         }
     }
