@@ -127,6 +127,7 @@ const server = net.createServer((connection) => {
         getFileData();
         return connection.write(getAllKeys());
     }
+    return connection.write('+PONG\r\n')
   })
 });
 
