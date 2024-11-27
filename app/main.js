@@ -26,7 +26,7 @@ if(fileDir && fileName){
 }
 console.log(config.get('dir'));
 
-fs.readFile(join(config.get('dire'),config.get('dbfilename')), 'utf-8', (err, data)=>{
+fs.readFile(join(config.get('dir'),config.get('dbfilename')), 'utf-8', (err, data)=>{
     if(err){
         console.log(err);
         return;
