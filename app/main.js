@@ -90,7 +90,11 @@ function getFileData(){
 
 // Uncomment this block to pass the first stage
 const server = net.createServer((connection) => {
+    const dbPath = join(config.get('dir'), config.get('dbfilename'));
+	const isDbExists = fs.existsSync(dbPath);
+    if(isDbExists){
     getFileData();
+    }
   // Handle connection
   connection.on('data',(data)=>{
     const commands = data.toString().split('\r\n');
