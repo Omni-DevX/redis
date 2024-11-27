@@ -30,7 +30,6 @@ if(fileDir && fileName){
 let data;
 
 let i = 0;
-getFileData();
 const getKeyLength = ()=>{
     const firsByte = data[i];
     const whatTypeOfLengthEncoding = firsByte >> 6;
@@ -88,6 +87,7 @@ function getFileData(){
        i++;
    }
    }
+getFileData();
 
 // Uncomment this block to pass the first stage
 const server = net.createServer((connection) => {
