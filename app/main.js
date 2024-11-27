@@ -16,7 +16,7 @@ const [fileDir,fileName] = [argument[1]??null, argument[3]??null];
 
 function getAllKeys() {
     const keys = dataStorage.keys();
-    console.log(keys);
+    console.log(keys.next().value);
     let response = "";
       response += `${keys.next().value.length}\r\n${keys.next().value}\r\n`;
     return `*${keys.length}\r\n` + response;
