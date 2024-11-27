@@ -28,7 +28,7 @@ if(fileDir && fileName){
     config.set('dbfilename', fileName);
 }
 
-const data = fs.readFile(join(config.get('dir'),config.get('dbfilename')), (err, data)=>{
+const data = fs.readFileSync(join(config.get('dir'),config.get('dbfilename')), (err, data)=>{
     if(err){
         console.log(err);
         return;
