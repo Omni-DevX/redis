@@ -31,7 +31,7 @@ fs.readFile(join(config.get('dir'),config.get('dbfilename')), (err, data)=>{
         console.log(err);
         return;
     }
-    console.log(data);
+    console.log(data[i]);
 })
 
 // Uncomment this block to pass the first stage
