@@ -20,7 +20,7 @@ function getAllKeys() {
     for (let key of keys) {
       response += `$${key.length}\r\n${key}\r\n`;
     }
-    connection.write(`*${keys.length}\r\n` + response);
+    return connection.write(`*${keys.length}\r\n` + response);
 }
 
 if(fileDir && fileName){
@@ -41,7 +41,6 @@ let i = 0;
 const getKeyLength = ()=>{
     const firsByte = data[i];
     const whatTypeOfLengthEncoding = firsByte >> 6;
-    console.log(whatTypeOfLengthEncoding);
     let length = 0;
     switch(whatTypeOfLengthEncoding){
         case 0b00:
@@ -49,7 +48,6 @@ const getKeyLength = ()=>{
             i++;
             break;
     }
-    console.log('length', length);
         return length;
 }
 
@@ -85,7 +83,6 @@ while(i < data.length){
         const value = getNextBytesWithLength(valueLength);
         console.log('key',key.toString(),'value',value.toString());
         dataStorage[key] = value;
-        console.log('dataStorage', dataStorage);
     }
     i++;
 }
