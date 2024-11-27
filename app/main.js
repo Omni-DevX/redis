@@ -30,7 +30,7 @@ if(fileDir && fileName){
 let data;
 
 let i = 0;
-
+getFileData();
 const getKeyLength = ()=>{
     const firsByte = data[i];
     const whatTypeOfLengthEncoding = firsByte >> 6;
@@ -125,7 +125,6 @@ const server = net.createServer((connection) => {
         }
     }
     else if(commands[2].toLowerCase() === 'keys'){
-        getFileData();
         return connection.write(getAllKeys());
     }
     return connection.write('+PONG\r\n')
