@@ -107,7 +107,7 @@ const server = net.createServer((connection) => {
         return connection.write('+OK\r\n');
     }
     else if(commands[2].toLowerCase() === 'get'){
-        console.log(dataStorage);
+        console.log(dataStorage[commands[4]]);
         if(dataStorage[commands[4]]){
         return connection.write('$'+dataStorage.get(commands[4]).length+'\r\n'+dataStorage.get(commands[4])+'\r\n');
         }
