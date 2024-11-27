@@ -55,7 +55,7 @@ const getKeyLength = ()=>{
 
 const getNextBytesWithLength = (length)=>{
     let nextBytes = Buffer.alloc(length);
-    for(let k = 0; i<length ; i++){
+    for(let k = 0; k<length ; i++){
         nextBytes[k] = data[i];
         i++;
     }
