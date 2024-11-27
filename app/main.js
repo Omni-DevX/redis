@@ -1,5 +1,6 @@
 const net = require("net");
 const fs = require("fs");
+const { join } = require('path');
 const storage = {}
 const config = new Map();
 const dataStorage = new Map();
@@ -25,7 +26,7 @@ if(fileDir && fileName){
 }
 console.log(config.get('dir'));
 
-fs.readFile(config.get('dbfilename'), 'utf-8', (err, data)=>{
+fs.readFile(join(config.get('dire'),config.get('dbfilename')), 'utf-8', (err, data)=>{
     if(err){
         console.log(err);
         return;
