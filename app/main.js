@@ -20,6 +20,7 @@ function getAllKeys() {
     for (let [key, value] of dataStorage) {
       response += `$${key.length}\r\n${key}\r\n`;
     }
+    console.log(response, keys.length);
     return `*${keys.length}\r\n` + response;
 }
 
