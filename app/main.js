@@ -19,7 +19,7 @@ function getAllKeys() {
     console.log(keys);
     let response = "";
     for (let key of keys) {
-      response += `${key.length}\r\n${key}\r\n`;
+      response += `${key.toString().length}\r\n${key}\r\n`;
     }
     return `*${keys.length}\r\n` + response;
 }
