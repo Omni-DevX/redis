@@ -83,6 +83,7 @@ function getFileData(){
            const value = getNextBytesWithLength(valueLength);
            console.log('key',key.toString(),'value',value.toString());
            dataStorage[key] = value;
+           console.log(dataStorage);
        }
        i++;
    }
