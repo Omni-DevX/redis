@@ -32,7 +32,6 @@ let data;
 let i = 0;
 const getKeyLength = ()=>{
     const firsByte = data[i];
-    console.log(firsByte);
     const whatTypeOfLengthEncoding = firsByte >> 6;
     let length = 0;
     switch(whatTypeOfLengthEncoding){
@@ -77,11 +76,8 @@ function getFileData(){
        const currentByte = data[i].toString(16);
        if(currentByte === opcodes.resizeDb){
            i++;
-           hashTable();
-           expiryHashTable();
-           console.log(hashTableLength);
-           console.log(expiryHashTableLength);
-           for(let i=0; i<hashTableLength; i++){
+           const n = getKeyLength()
+           for(let i=0; i<n; i++){
            const keyLength = getKeyLength();
            const key = getNextBytesWithLength(keyLength);
            const valueLength = getKeyLength();
