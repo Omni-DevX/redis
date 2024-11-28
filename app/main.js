@@ -51,9 +51,10 @@ const getNextBytesWithLength = (length)=>{
     }
     return nextBytes;
 }
-
+let hashTableLength = 0;
 hashTable = ()=>{
     const length = getKeyLength();
+    hashTableLength = length
     const bytes = getNextBytesWithLength(length);
 }
 
@@ -76,12 +77,14 @@ function getFileData(){
            i++;
            hashTable();
            expiryHashTable();
+           for(let i=0; i<hashTableLength; i++){
            const keyLength = getKeyLength();
            const key = getNextBytesWithLength(keyLength);
            const valueLength = getKeyLength();
            const value = getNextBytesWithLength(valueLength);
            console.log('key',key.toString(),'value',value.toString());
            dataStorage.set(key.toString(), value.toString());
+           }
        }
        i++;
    }
