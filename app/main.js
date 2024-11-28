@@ -75,7 +75,6 @@ function getFileData(){
    while(i < data.length){
        const currentByte = data[i].toString(16);
        if(currentByte === opcodes.resizeDb){
-           i+= 2;
            const n = getKeyLength()
            for(let i=0; i<n; i++){
            const keyLength = getKeyLength();
@@ -85,8 +84,9 @@ function getFileData(){
            console.log('key',key.toString(),'value',value.toString());
            dataStorage.set(key.toString(), value.toString());
            }
+           i++;
        }
-       i++; 
+       i++;
    }
    console.log(dataStorage);
    }
