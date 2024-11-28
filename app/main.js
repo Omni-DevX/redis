@@ -77,6 +77,7 @@ function getFileData(){
            i++;
            hashTable();
            expiryHashTable();
+           console.log(hashTableLength);
            for(let i=0; i<hashTableLength; i++){
            const keyLength = getKeyLength();
            const key = getNextBytesWithLength(keyLength);
